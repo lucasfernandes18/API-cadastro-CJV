@@ -19,6 +19,9 @@ public class NinjaModel {
     private String email;
     private String idade;
 
+
+
+    
     public NinjaModel() {
     }
 
