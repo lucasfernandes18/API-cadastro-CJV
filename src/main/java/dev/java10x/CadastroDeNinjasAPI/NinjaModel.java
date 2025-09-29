@@ -20,8 +20,6 @@ public class NinjaModel {
     private String idade;
 
 
-
-    
     public NinjaModel() {
     }
 
