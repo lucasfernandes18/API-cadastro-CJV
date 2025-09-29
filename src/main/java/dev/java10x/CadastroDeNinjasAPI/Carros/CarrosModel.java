@@ -19,18 +19,22 @@ public class CarrosModel {
     private String modelo;
     private String placa;
     private int ano;
+
+    //muitos carros podem estar vinculados a um usuário
+    @ManyToOne
+    @JoinColumn(name = "usuarios_id") //foreing key chave estrangeira
     private UsuariosModel usuario;
 
 
     public CarrosModel() {
     }
 
-    public CarrosModel(long id, String modelo, String placa, int ano, UsuariosModel usuario) {
+    public CarrosModel(long id, String modelo, String placa, int ano) {
         this.id = id;
         this.modelo = modelo;
         this.placa = placa;
         this.ano = ano;
-        this.usuario = usuario;
+
     }
 
     public long getId() {
@@ -65,11 +69,4 @@ public class CarrosModel {
         this.ano = ano;
     }
 
-    public UsuariosModel getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuariosModel usuario) {
-        this.usuario = usuario;
-    }
 }

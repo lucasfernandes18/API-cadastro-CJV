@@ -1,5 +1,6 @@
 package dev.java10x.CadastroDeNinjasAPI.Usuarios;
 
+import dev.java10x.CadastroDeNinjasAPI.Carros.CarrosModel;
 import jakarta.persistence.*;
 
 
@@ -15,22 +16,32 @@ public class UsuariosModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
+
     private String nome;
+
     private String email;
+
     private String idade;
+
     private int cnh;
+
+    //um usuário pode locar vários carros
+    @OneToMany(mappedBy = "carros")
+    private CarrosModel carros;
 
 
 
     public UsuariosModel() {
     }
 
-    public UsuariosModel(long id, String nome, String email, String idade, int cnh) {
+    public UsuariosModel(long id, String nome, String email, String idade, int cnh, CarrosModel carros) {
+
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.idade = idade;
         this.cnh = cnh;
+        this.carros = carros;
     }
 
     public long getId() {
@@ -71,5 +82,13 @@ public class UsuariosModel {
 
     public void setCnh(int cnh) {
         this.cnh = cnh;
+    }
+
+    public CarrosModel getCarros() {
+        return carros;
+    }
+
+    public void setCarros(CarrosModel carros) {
+        this.carros = carros;
     }
 }
