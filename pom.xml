@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>dev.java10x</groupId>
-	<artifactId>CadastroDeNinjasAPI</artifactId>
+	<artifactId>LocadoraAPI</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>CadastroDeNinjasAPI</name>
 	<description>uma api para cadastro de ninjas</description>

@@ -1,4 +1,4 @@
-package dev.java10x.CadastroDeNinjasAPI;
+package dev.java10x.CadastroDeNinjasAPI.Usuarios;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping
-public class NinjaController {
+public class UsuariosController {
 
 
     @GetMapping("/boasvindas")
