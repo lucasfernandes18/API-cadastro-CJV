@@ -3,6 +3,8 @@ package dev.java10x.CadastroDeNinjasAPI.Usuarios;
 import dev.java10x.CadastroDeNinjasAPI.Carros.CarrosModel;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 //Entity transforma uma classe em uma entidade do DB
 // JPA = java persistence API
@@ -27,68 +29,8 @@ public class UsuariosModel {
 
     //um usuário pode locar vários carros
     @OneToMany(mappedBy = "carros")
-    private CarrosModel carros;
+    private List<CarrosModel> carros;
 
 
 
-    public UsuariosModel() {
-    }
-
-    public UsuariosModel(long id, String nome, String email, String idade, int cnh, CarrosModel carros) {
-
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.idade = idade;
-        this.cnh = cnh;
-        this.carros = carros;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getIdade() {
-        return idade;
-    }
-
-    public void setIdade(String idade) {
-        this.idade = idade;
-    }
-
-    public int getCnh() {
-        return cnh;
-    }
-
-    public void setCnh(int cnh) {
-        this.cnh = cnh;
-    }
-
-    public CarrosModel getCarros() {
-        return carros;
-    }
-
-    public void setCarros(CarrosModel carros) {
-        this.carros = carros;
-    }
 }

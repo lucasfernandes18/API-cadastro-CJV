@@ -2,15 +2,22 @@ package dev.java10x.CadastroDeNinjasAPI.Carros;
 
 import dev.java10x.CadastroDeNinjasAPI.Usuarios.UsuariosModel;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 //Entity transforma uma classe em uma entidade do DB
 // JPA = java persistence API
+
 @Entity
 @Table(name = "tb_carros")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data // cria todos os getters e setters
 
 
-public class CarrosModel {
+public class  CarrosModel {
 
 
     @Id
@@ -26,47 +33,8 @@ public class CarrosModel {
     private UsuariosModel usuario;
 
 
-    public CarrosModel() {
-    }
 
-    public CarrosModel(long id, String modelo, String placa, int ano) {
-        this.id = id;
-        this.modelo = modelo;
-        this.placa = placa;
-        this.ano = ano;
-
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public String getPlaca() {
-        return placa;
-    }
-
-    public void setPlaca(String placa) {
-        this.placa = placa;
-    }
-
-    public int getAno() {
-        return ano;
-    }
-
-    public void setAno(int ano) {
-        this.ano = ano;
-    }
 
 }
+
+
