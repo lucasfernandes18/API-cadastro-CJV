@@ -20,12 +20,17 @@ public class UsuariosModel {
     long id;
 
     private String nome;
-
-    private String email;
-
     private String idade;
 
+    @Column(unique = true)
+    private long cpf;
+    @Column(unique = true)
     private int cnh;
+    @Column(unique = true)
+    private String email;
+
+
+
 
     //um usuário pode locar vários carros
     @OneToMany(mappedBy = "carros")
