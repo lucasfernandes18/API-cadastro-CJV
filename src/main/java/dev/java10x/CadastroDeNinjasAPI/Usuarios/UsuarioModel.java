@@ -1,6 +1,6 @@
 package dev.java10x.CadastroDeNinjasAPI.Usuarios;
 
-import dev.java10x.CadastroDeNinjasAPI.Carros.CarrosModel;
+import dev.java10x.CadastroDeNinjasAPI.Carros.CarroModel;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "tb_usuarios")
 
 
-public class UsuariosModel {
+public class UsuarioModel {
 
 
     @Id
@@ -34,7 +34,7 @@ public class UsuariosModel {
 
     //um usuário pode locar vários carros
     @OneToMany(mappedBy = "carros")
-    private List<CarrosModel> carros;
+    private List<CarroModel> carros;
 
 
 

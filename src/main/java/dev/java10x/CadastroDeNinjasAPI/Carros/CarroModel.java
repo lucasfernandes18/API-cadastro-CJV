@@ -1,6 +1,6 @@
 package dev.java10x.CadastroDeNinjasAPI.Carros;
 
-import dev.java10x.CadastroDeNinjasAPI.Usuarios.UsuariosModel;
+import dev.java10x.CadastroDeNinjasAPI.Usuarios.UsuarioModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Data // cria todos os getters e setters
 
 
-public class  CarrosModel {
+public class CarroModel {
 
 
     @Id
@@ -30,7 +30,7 @@ public class  CarrosModel {
     //muitos carros podem estar vinculados a um usuário
     @ManyToOne
     @JoinColumn(name = "usuarios_id") //foreing key chave estrangeira
-    private UsuariosModel usuario;
+    private UsuarioModel usuario;
 
 
 
