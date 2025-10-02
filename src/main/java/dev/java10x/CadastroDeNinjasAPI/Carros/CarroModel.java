@@ -22,9 +22,16 @@ public class CarroModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     long id;
+
+    @Column(name = "modelo")
     private String modelo;
+
+    @Column(unique = true)
     private String placa;
+
+    @Column(name = "ano")
     private int ano;
 
     //muitos carros podem estar vinculados a um usuário

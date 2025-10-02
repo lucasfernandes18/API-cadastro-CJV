@@ -17,15 +17,21 @@ public class UsuarioModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     long id;
 
+    @Column(name = "name")
     private String nome;
+
+    @Column( name = "idade")
     private String idade;
 
     @Column(unique = true)
     private long cpf;
+
     @Column(unique = true)
     private int cnh;
+
     @Column(unique = true)
     private String email;
 
