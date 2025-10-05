@@ -39,7 +39,7 @@ public class UsuarioModel {
 
 
     //um usuário pode locar vários carros
-    @OneToMany(mappedBy = "carros")
+    @OneToMany(mappedBy = "usuario") //mapeia todos os carros que esse usuário tem
     private List<CarroModel> carros;
 
 
