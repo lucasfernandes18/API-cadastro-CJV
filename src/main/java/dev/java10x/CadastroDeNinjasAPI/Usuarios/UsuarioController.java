@@ -4,14 +4,9 @@ package dev.java10x.CadastroDeNinjasAPI.Usuarios;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
-
-    @GetMapping("/boasvindasDoUsuario")
-    public String boasVindas(){
-        return "Essa é minha primeira mensagem nessa rota";
-    }
 
     //Adicionar usuário (create)
     @PostMapping("/criar")
@@ -20,9 +15,9 @@ public class UsuarioController {
     }
 
     //mostrar todos os usuarios (read)
-    @GetMapping("/todos")
+    @GetMapping("/listar")
     public String motrarUsuarios(){
-        return "Mostrar usuàrios";
+        return "Mostrar todos os usuàrios";
     }
 
 
@@ -30,21 +25,21 @@ public class UsuarioController {
 
     @GetMapping("/usuarioID")
     public String motrarUsuariosPorId(){
-        return "Mostrar usuàrios por id";
+        return "mostrar usuário";
     }
 
 
 
     //Alterar dados dos ninjas (update)
-    @PutMapping("/alterarID")
+    @PutMapping("/alterar")
     public String alterarUsuario(){
-        return "alterar usuario";
+        return "alterar dados do usuário usuario";
     }
 
 
     //Deletar Ninja (delete)
 
-    @DeleteMapping("/deletarID")
+    @DeleteMapping("/deletar")
     public String deletarUsuarioPorID (){
         return "deletar usuario";
     }
