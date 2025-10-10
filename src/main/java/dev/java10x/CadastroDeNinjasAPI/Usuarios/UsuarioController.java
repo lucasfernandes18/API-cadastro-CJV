@@ -3,10 +3,17 @@ package dev.java10x.CadastroDeNinjasAPI.Usuarios;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
+    private UsuarioService usuarioService;
+
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
 
     //Adicionar usuário (create)
     @PostMapping("/criar")
@@ -16,9 +23,10 @@ public class UsuarioController {
 
     //mostrar todos os usuarios (read)
     @GetMapping("/listar")
-    public String motrarUsuarios(){
-        return "Mostrar todos os usuàrios";
+    public List<UsuarioModel> listarUsuarios() {
+        return usuarioService.listarUsuarios();
     }
+
 
 
     //mostrar usuário por id (read)
