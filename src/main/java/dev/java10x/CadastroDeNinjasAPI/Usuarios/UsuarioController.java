@@ -17,8 +17,10 @@ public class UsuarioController {
 
     //Adicionar usuário (create)
     @PostMapping("/criar")
-    public String criarUsuario(){
-        return "Usuário criado";
+    //@RequestBody faz a serialização inversa dos usuarios do ninja model de volta para o db
+    public UsuarioModel criarUsuario(@RequestBody UsuarioModel usuario){
+
+        return usuarioService.criarUsuario(usuario);
     }
 
     //mostrar todos os usuarios (read)
@@ -31,6 +33,7 @@ public class UsuarioController {
 
     //mostrar usuário por id (read)
     @GetMapping("/usuarioId/{id}")
+    //@PathVariable liga uma parte dinamica da url a uma variável
     public UsuarioModel listarUsuariosPorId(@PathVariable Long id){
        return usuarioService.listarUsuariosPorId(id);
     }

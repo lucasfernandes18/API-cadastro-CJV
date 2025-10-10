@@ -27,6 +27,11 @@ public class UsuarioService {
         return usuarioId.orElse(null);
     }
 
+    //criar um novo usuario
+    public UsuarioModel criarUsuario(UsuarioModel usuario) {
+      return usuarioRepository.save(usuario);
+    }
+
 
 
 
