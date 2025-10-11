@@ -37,6 +37,16 @@ public class UsuarioService {
          usuarioRepository.deleteById(id);
     }
 
+    //atualizar um usuário
+    public UsuarioModel alterarUsuario(Long id,UsuarioModel usuarioAtualizado){
+        if (usuarioRepository.existsById(id)){
+            usuarioAtualizado.setId(id);
+            return usuarioRepository.save(usuarioAtualizado);
+        }
+        return null;
+    }
+
+
 
 
 

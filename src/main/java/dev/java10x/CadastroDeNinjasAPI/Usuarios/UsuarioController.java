@@ -41,10 +41,12 @@ public class UsuarioController {
 
 
     //Alterar dados dos ninjas (update)
-    @PutMapping("/alterar")
-    public String alterarUsuario(){
-        return "alterar dados do usuário usuario";
+    @PutMapping("/alterar/{id}")
+    public UsuarioModel  alterarUsuarioId(@PathVariable Long id, @RequestBody UsuarioModel usuarioAtualizado){
+return usuarioService.alterarUsuario(id, usuarioAtualizado);
     }
+
+
 
 
     //Deletar Ninja (delete)
