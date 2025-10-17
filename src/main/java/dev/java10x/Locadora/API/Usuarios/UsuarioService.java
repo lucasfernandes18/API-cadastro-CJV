@@ -1,8 +1,7 @@
-package dev.java10x.CadastroDeNinjasAPI.Usuarios;
+package dev.java10x.Locadora.API.Usuarios;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,16 +10,20 @@ import java.util.Optional;
 public class UsuarioService {
 
     private UsuarioRepository usuarioRepository;
+    private UsuarioMapper usuarioMapper;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, UsuarioMapper usuarioMapper) {
         this.usuarioRepository = usuarioRepository;
+        this.usuarioMapper = usuarioMapper;
     }
 
     //listar todos os usuários
-    public List<UsuarioModel> listarUsuarios( ){
-        return usuarioRepository.findAll();
+    public List<UsuarioDTO> listarUsuarios() {
+        List<UsuarioModel> usuarios = usuarioRepository.findAll();
+        return usuarios.stream()
+                .map(usuarioMapper::map)
+                .collect(Collectors.toList());
     }
-
     //listar os usuários por id
     public UsuarioModel listarUsuariosPorId(Long id){
         Optional<UsuarioModel> usuarioId = usuarioRepository.findById(id);
@@ -28,8 +31,10 @@ public class UsuarioService {
     }
 
     //criar um novo usuario
-    public UsuarioModel criarUsuario(UsuarioModel usuario) {
-      return usuarioRepository.save(usuario);
+    public UsuarioDTO criarUsuario(UsuarioDTO usuarioDTO) {
+      UsuarioModel usuario = usuarioMapper.map(usuarioDTO);
+      usuario = usuarioRepository.save(usuario);
+      return usuarioMapper.map(usuario);
     }
 
     //deletar o usuario - tem que ser um método void

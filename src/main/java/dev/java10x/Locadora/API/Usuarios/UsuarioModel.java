@@ -1,6 +1,6 @@
-package dev.java10x.CadastroDeNinjasAPI.Usuarios;
+package dev.java10x.Locadora.API.Usuarios;
 
-import dev.java10x.CadastroDeNinjasAPI.Carros.CarroModel;
+import dev.java10x.Locadora.API.Carros.CarroModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,16 +30,17 @@ public class UsuarioModel {
     private String nome;
 
     @Column( name = "idade")
-    private String idade;
+    private Integer idade;
 
     @Column(unique = true)
     private long cpf;
 
     @Column(unique = true)
-    private int cnh;
+    private Integer cnh;
 
     @Column(unique = true)
     private String email;
+
 
 
 
