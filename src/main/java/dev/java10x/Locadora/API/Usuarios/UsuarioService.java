@@ -24,10 +24,11 @@ public class UsuarioService {
                 .map(usuarioMapper::map)
                 .collect(Collectors.toList());
     }
+
     //listar os usuários por id
-    public UsuarioModel listarUsuariosPorId(Long id){
+    public UsuarioDTO listarUsuariosPorId(Long id){
         Optional<UsuarioModel> usuarioId = usuarioRepository.findById(id);
-        return usuarioId.orElse(null);
+        return usuarioId.map(usuarioMapper::map).orElse(null);
     }
 
     //criar um novo usuario
@@ -43,12 +44,15 @@ public class UsuarioService {
     }
 
     //atualizar um usuário
-    public UsuarioModel alterarUsuario(Long id,UsuarioModel usuarioAtualizado){
-        if (usuarioRepository.existsById(id)){
-            usuarioAtualizado.setId(id);
-            return usuarioRepository.save(usuarioAtualizado);
-        }
-        return null;
+    public UsuarioDTO alterarUsuario(Long id,UsuarioDTO usuarioDTO){
+    Optional<UsuarioModel> usuarioExistente = usuarioRepository.findById(id);
+    if (usuarioExistente.isPresent()) {
+        UsuarioModel usuarioAtualizado = usuarioMapper.map(usuarioDTO);
+        usuarioAtualizado.setId(id);
+        UsuarioModel usuarioSalvo = usuarioRepository.save(usuarioAtualizado);
+        return usuarioMapper.map(usuarioSalvo);
+    }
+    return null;
     }
 
 

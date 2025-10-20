@@ -34,7 +34,7 @@ public class UsuarioController {
     //mostrar usuário por id (read)
     @GetMapping("/usuarioId/{id}")
     //@PathVariable liga uma parte dinamica da url a uma variável
-    public UsuarioModel listarUsuariosPorId(@PathVariable Long id){
+    public UsuarioDTO listarUsuariosPorId(@PathVariable Long id){
        return usuarioService.listarUsuariosPorId(id);
     }
 
@@ -42,7 +42,7 @@ public class UsuarioController {
 
     //Alterar dados dos ninjas (update)
     @PutMapping("/alterar/{id}")
-    public UsuarioModel  alterarUsuarioId(@PathVariable Long id, @RequestBody UsuarioModel usuarioAtualizado){
+    public UsuarioDTO  alterarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioAtualizado){
 return usuarioService.alterarUsuario(id, usuarioAtualizado);
     }
 
