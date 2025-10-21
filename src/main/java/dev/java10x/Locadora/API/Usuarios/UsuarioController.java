@@ -1,4 +1,4 @@
-package dev.java10x.CadastroDeNinjasAPI.Usuarios;
+package dev.java10x.Locadora.API.Usuarios;
 
 
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +18,14 @@ public class UsuarioController {
     //Adicionar usuário (create)
     @PostMapping("/criar")
     //@RequestBody faz a serialização inversa dos usuarios do ninja model de volta para o db
-    public UsuarioModel criarUsuario(@RequestBody UsuarioModel usuario){
+    public UsuarioDTO criarUsuario(@RequestBody UsuarioDTO usuario){
 
         return usuarioService.criarUsuario(usuario);
     }
 
     //mostrar todos os usuarios (read)
     @GetMapping("/listar")
-    public List<UsuarioModel> listarUsuarios() {
+    public List<UsuarioDTO> listarUsuarios() {
         return usuarioService.listarUsuarios();
     }
 
@@ -34,7 +34,7 @@ public class UsuarioController {
     //mostrar usuário por id (read)
     @GetMapping("/usuarioId/{id}")
     //@PathVariable liga uma parte dinamica da url a uma variável
-    public UsuarioModel listarUsuariosPorId(@PathVariable Long id){
+    public UsuarioDTO listarUsuariosPorId(@PathVariable Long id){
        return usuarioService.listarUsuariosPorId(id);
     }
 
@@ -42,7 +42,7 @@ public class UsuarioController {
 
     //Alterar dados dos ninjas (update)
     @PutMapping("/alterar/{id}")
-    public UsuarioModel  alterarUsuarioId(@PathVariable Long id, @RequestBody UsuarioModel usuarioAtualizado){
+    public UsuarioDTO  alterarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioAtualizado){
 return usuarioService.alterarUsuario(id, usuarioAtualizado);
     }
 

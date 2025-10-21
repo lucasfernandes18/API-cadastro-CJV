@@ -1,6 +1,5 @@
-package dev.java10x.CadastroDeNinjasAPI.Carros;
+package dev.java10x.Locadora.API.Carros;
 
-import dev.java10x.CadastroDeNinjasAPI.Usuarios.UsuarioModel;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 

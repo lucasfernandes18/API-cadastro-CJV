@@ -1,6 +1,6 @@
-package dev.java10x.CadastroDeNinjasAPI.Carros;
+package dev.java10x.Locadora.API.Carros;
 
-import dev.java10x.CadastroDeNinjasAPI.Usuarios.UsuarioModel;
+import dev.java10x.Locadora.API.Usuarios.UsuarioModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
