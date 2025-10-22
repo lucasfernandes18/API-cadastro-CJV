@@ -25,8 +25,6 @@ public class UsuarioController {
         UsuarioDTO novoUsuario = usuarioService.criarUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Usuário criado com sucesso " + novoUsuario.getNome() + "ID):" + novoUsuario.getId());
-
-
     }
 
     //mostrar todos os usuarios (read)
@@ -35,38 +33,30 @@ public class UsuarioController {
         return usuarioService.listarUsuarios();
     }
 
-
     //mostrar usuário por id (read)
     @GetMapping("/usuarioId/{id}")
-
-    public ResponseEntity<String> listarUsuariosPorId(@PathVariable Long id) {
+    public ResponseEntity<?> listarUsuariosPorId(@PathVariable Long id) {
         UsuarioDTO usuario = usuarioService.listarUsuariosPorId(id);
         if (usuarioService.listarUsuariosPorId(id) != null){
-            usuarioService.listarUsuariosPorId(id);
-            return ResponseEntity.ok("usuário encontrado \n" + usuario );
+            return ResponseEntity.ok(usuario);
         }else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Usuário não encontrado");
         }
-
     }
-
 
     //Alterar dados dos usu (update)
     @PutMapping("/alterar/{id}")
     public ResponseEntity<String> alterarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioAtualizado) {
+       UsuarioDTO usuario = usuarioService.listarUsuariosPorId(id);
         if (usuarioService.alterarUsuario(id, usuarioAtualizado) != null){
-            usuarioService.alterarUsuario(id, usuarioAtualizado);
-            return ResponseEntity.ok("usuario com id: " + id + "alterado com sucesso");
-
-
+            return ResponseEntity.ok("o usuario " + usuario.getNome() + " com id: " + id + " alterado com sucesso");
         }else {
             return ResponseEntity.status((HttpStatus.NOT_FOUND))
                     .body("Não foi possível encontrar o usuário");
         }
 
     }
-
 
     //Deletar Usuario (delete)
 
@@ -85,5 +75,3 @@ public class UsuarioController {
 
     }
 }
-
-
