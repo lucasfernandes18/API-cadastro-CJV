@@ -34,6 +34,9 @@ public class CarroModel {
     @Column(name = "ano")
     private int ano;
 
+    @Column (name = "cor")
+    private String cor;
+
     //muitos carros podem estar vinculados a um usuário
     @ManyToOne
     @JoinColumn(name = "usuarios_id") //foreing key chave estrangeira
