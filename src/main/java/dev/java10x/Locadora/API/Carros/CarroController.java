@@ -1,5 +1,7 @@
 package dev.java10x.Locadora.API.Carros;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -14,27 +16,48 @@ public class CarroController {
     }
 
     @PostMapping("/criar")
-    public CarroModel criarCarro(@RequestBody CarroModel carro){
-        return carroService.criarCarro(carro);
+    public ResponseEntity<String> criarCarro(@RequestBody CarroDTO carro){
+        CarroDTO novoCarro = carroService.criarCarro(carro);
+        return ResponseEntity.status((HttpStatus.CREATED))
+                .body("Carro cadastrado com sucesso " + novoCarro.getModelo() + "ID: " + novoCarro.getId());
     }
 
     @GetMapping("/listar")
-    public List<CarroModel> listarCarros(){
+    public List<CarroDTO> listarCarros(){
         return carroService.listarCarros();
     }
 
     @GetMapping("/carroId/{id}")
-    public CarroModel carroId(@PathVariable Long id){
-        return carroService.buscarCarrosPorId(id);
+    public ResponseEntity<?> carroId(@PathVariable Long id){
+        CarroDTO carro = carroService.buscarCarrosPorId(id);
+        if (carroService.buscarCarrosPorId(id) != null){
+            return ResponseEntity.ok(carro);
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Modelo não encontrado");
+        }
     }
 
     @PutMapping("/alterar/{id}")
-    public CarroModel alterarCarro(@RequestBody Long id, CarroModel carroAtualizado){
-        return carroService.alterarCarro(id, carroAtualizado);
+    public ResponseEntity<String> alterarCarro(@RequestBody Long id, CarroDTO carroAtualizado){
+        CarroDTO carro = carroService.buscarCarrosPorId(id);
+        if (carroService.alterarCarro(id , carroAtualizado) != null){
+            return ResponseEntity.ok("o carro " +carro.getModelo() + " com o id: " + carro.getId() + "alterado com sucesso");
+
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Carro não encontrado");
+        }
     }
 
     @DeleteMapping("/deletar/{id}")
-    public void deletarCarro(@PathVariable Long id){
-        carroService.deletarCarro(id);
+    public ResponseEntity<String> deletarCarro(@PathVariable Long id){
+        if (carroService.buscarCarrosPorId(id) != null){
+            carroService.deletarCarro(id);
+            return ResponseEntity.ok ("Carro com o id: " + id + "deletado com sucesso");
+        }else
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("o carro com o id  " + id + " não foi encontrado ");
+
     }
 }

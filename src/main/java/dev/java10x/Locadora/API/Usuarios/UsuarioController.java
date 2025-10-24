@@ -24,7 +24,7 @@ public class UsuarioController {
     public ResponseEntity<String> criarUsuario(@RequestBody UsuarioDTO usuario) {
         UsuarioDTO novoUsuario = usuarioService.criarUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Usuário criado com sucesso " + novoUsuario.getNome() + "ID):" + novoUsuario.getId());
+                .body("Usuário cadastrado com sucesso " + novoUsuario.getNome() + "ID: " + novoUsuario.getId());
     }
 
     //mostrar todos os usuarios (read)
