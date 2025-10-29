@@ -1,6 +1,7 @@
 package dev.java10x.Locadora.API.Usuarios;
 
 
+import dev.java10x.Locadora.API.Carros.CarroDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -29,8 +30,10 @@ public class UsuarioController {
 
     //mostrar todos os usuarios (read)
     @GetMapping("/listar")
-    public List<UsuarioDTO> listarUsuarios() {
-        return usuarioService.listarUsuarios();
+
+    public ResponseEntity<List<UsuarioDTO>> listarUsuarios() {
+       List<UsuarioDTO> usuarios = usuarioService.listarUsuarios();
+        return ResponseEntity.ok(usuarios);
     }
 
     //mostrar usuário por id (read)
