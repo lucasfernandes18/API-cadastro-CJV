@@ -1,30 +1,46 @@
 package dev.java10x.Locadora.API.Carros;
 
+import dev.java10x.Locadora.API.Usuarios.UsuarioDTO;
+import dev.java10x.Locadora.API.Usuarios.UsuarioModel;
+import dev.java10x.Locadora.API.Usuarios.UsuarioRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/carros")
 public class CarroController {
 
     private CarroService carroService;
+    private UsuarioRepository usuarioRepository;
+    private CarroMapper carroMapper;
+    private CarroRepository carroRepository;
 
-    public CarroController(CarroService carroService) {
+    public CarroController(CarroService carroService, CarroRepository carroRepository, CarroMapper carroMapper, UsuarioRepository usuarioRepository) {
         this.carroService = carroService;
+        this.carroRepository = carroRepository;
+        this.carroMapper = carroMapper;
+        this.usuarioRepository = usuarioRepository;
     }
+
 
     @PostMapping("/criar")
-    public ResponseEntity<String> criarCarro(@RequestBody CarroDTO carro){
-        CarroDTO novoCarro = carroService.criarCarro(carro);
-        return ResponseEntity.status((HttpStatus.CREATED))
-                .body("Carro cadastrado com sucesso " + novoCarro.getModelo() + "ID: " + novoCarro.getId());
+    public ResponseEntity<?> criarCarroAlugado(@RequestBody CarroDTO carroDTO) {
+        try {
+            CarroDTO carroResponse = carroService.criarCarroAlugado(carroDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(carroResponse);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
+
     @GetMapping("/listar")
-    public List<CarroDTO> listarCarros(){
-        return carroService.listarCarros();
+    public ResponseEntity<List<CarroDTO>> listarCarros(){
+        List<CarroDTO> carros = carroService.listarCarros();
+        return ResponseEntity.ok(carros);
     }
 
     @GetMapping("/carroId/{id}")

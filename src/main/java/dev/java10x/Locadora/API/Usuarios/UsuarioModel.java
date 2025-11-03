@@ -1,5 +1,6 @@
 package dev.java10x.Locadora.API.Usuarios;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.java10x.Locadora.API.Carros.CarroModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -46,9 +47,8 @@ public class UsuarioModel {
 
 
     //um usuário pode locar vários carros
-    @OneToMany(mappedBy = "usuario") //mapeia todos os carros que esse usuário tem
+    @OneToMany(mappedBy = "usuario")
     private List<CarroModel> carros;
-
 
 
 }

@@ -1,6 +1,10 @@
 package dev.java10x.Locadora.API.Carros;
 
 import dev.java10x.Locadora.API.Usuarios.UsuarioMapper;
+import dev.java10x.Locadora.API.Usuarios.UsuarioModel;
+import dev.java10x.Locadora.API.Usuarios.UsuarioRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,10 +13,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class CarroService {
+
+
+    private UsuarioRepository usuarioRepository;
     private CarroRepository carroRepository;
     private CarroMapper carroMapper;
 
-    public CarroService(CarroRepository carroRepository, CarroMapper carroMapper) {
+    public CarroService(UsuarioRepository usuarioRepository, CarroRepository carroRepository, CarroMapper carroMapper) {
+        this.usuarioRepository = usuarioRepository;
         this.carroRepository = carroRepository;
         this.carroMapper = carroMapper;
     }
@@ -32,12 +40,37 @@ public class CarroService {
          return carroId.map(carroMapper::map).orElse(null);
      }
 
-    //criar um novo carro
-    public CarroDTO criarCarro(CarroDTO carroDTO){
+    public CarroDTO criarCarroAlugado(CarroDTO carroDTO) {
+        // Buscar o usuário pelo ID do DTO
+        Optional<UsuarioModel> usuarioOpt = usuarioRepository.findById(carroDTO.getUsuario().getId());
+
+        if (usuarioOpt.isEmpty()) {
+            throw new RuntimeException("Usuário com ID " + carroDTO.getUsuario() + " não encontrado.");
+        }
+
+        UsuarioModel usuario = usuarioOpt.get();
+
+        // Mapear DTO para Model
+        CarroModel carro = carroMapper.map(carroDTO);
+
+        // Associar usuário
+        carro.setUsuario(usuario);
+
+        // Salvar no banco
+        CarroModel carroSalvo = carroRepository.save(carro);
+
+        // Mapear de volta para DTO
+        CarroDTO carroResponse = carroMapper.map(carroSalvo);
+
+        // Retornar o DTO criado
+        return carroResponse;
+    }
+ /*   public CarroDTO criarCarro(CarroDTO carroDTO){
         CarroModel carro = carroMapper.map(carroDTO);
         carro = carroRepository.save(carro);
         return carroMapper.map(carro);
     }
+*/
 
 
 
@@ -45,8 +78,6 @@ public class CarroService {
     public void deletarCarro(Long id){
          carroRepository.deleteById(id);
     }
-
-
 
 
     //atualizar o carro
