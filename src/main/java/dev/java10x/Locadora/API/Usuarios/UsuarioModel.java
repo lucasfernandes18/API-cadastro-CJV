@@ -1,6 +1,7 @@
 package dev.java10x.Locadora.API.Usuarios;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.java10x.Locadora.API.Carros.CarroModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -48,6 +49,7 @@ public class UsuarioModel {
 
     //um usuário pode locar vários carros
     @OneToMany(mappedBy = "usuario")
+    @JsonManagedReference
     private List<CarroModel> carros;
 
 

@@ -1,5 +1,6 @@
 package dev.java10x.Locadora.API.Carros;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.java10x.Locadora.API.Usuarios.UsuarioModel;
 import jakarta.persistence.*;
@@ -46,6 +47,7 @@ public class CarroModel {
     //muitos carros podem estar vinculados a um usuário
     @ManyToOne
     @JoinColumn(name= "usuario_id")//foreing key chave estrangeira
+    @JsonBackReference
     private UsuarioModel usuario;
 
 
