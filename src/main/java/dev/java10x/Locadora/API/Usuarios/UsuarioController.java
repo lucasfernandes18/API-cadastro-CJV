@@ -30,7 +30,6 @@ public class UsuarioController {
 
     //mostrar todos os usuarios (read)
     @GetMapping("/listar")
-
     public ResponseEntity<List<UsuarioDTO>> listarUsuarios() {
        List<UsuarioDTO> usuarios = usuarioService.listarUsuarios();
         return ResponseEntity.ok(usuarios);

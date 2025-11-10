@@ -21,12 +21,11 @@ import java.util.List;
 @Data // cria todos os getters e setters
 @ToString
 
-
 public class UsuarioModel {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "id")
    private Long id;
 
@@ -44,10 +43,6 @@ public class UsuarioModel {
 
     @Column(unique = true)
     private String email;
-
-
-
-
 
     //um usuário pode locar vários carros
     @OneToMany(mappedBy = "usuario")
