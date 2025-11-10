@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data // cria todos os getters e setters
+@ToString
 
 
 public class UsuarioModel {
@@ -49,7 +51,7 @@ public class UsuarioModel {
 
     //um usuário pode locar vários carros
     @OneToMany(mappedBy = "usuario")
-    @JsonManagedReference
+
     private List<CarroModel> carros;
 
 

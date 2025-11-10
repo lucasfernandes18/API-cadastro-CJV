@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data // cria todos os getters e setters
+@ToString(exclude = "usuario")
+
 
 
 public class CarroModel {
@@ -47,7 +50,7 @@ public class CarroModel {
     //muitos carros podem estar vinculados a um usuário
     @ManyToOne
     @JoinColumn(name= "usuario_id")//foreing key chave estrangeira
-    @JsonBackReference
+
     private UsuarioModel usuario;
 
 
