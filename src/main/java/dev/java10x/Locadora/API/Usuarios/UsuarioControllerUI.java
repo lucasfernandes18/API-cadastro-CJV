@@ -1,10 +1,10 @@
 package dev.java10x.Locadora.API.Usuarios;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +23,29 @@ public class UsuarioControllerUI {
         model.addAttribute("usuarios", usuarios);
         return "listarUsuarios"; //precisa retornar o nome da pagina que reendeniza
     }
+
+    @GetMapping("/deletar/{id}")
+    public String deletarUsuarioPorID(@PathVariable Long id) {
+        usuarioService.deletarUsuarioId(id);
+        return "redirect:/usuarios/ui/listar";
+
+    }
+
+
+
+    @GetMapping("/usuarioId/{id}")
+    public String listarUsuariosPorId(@PathVariable Long id, Model model) {
+        UsuarioDTO usuario = usuarioService.listarUsuariosPorId(id);
+        if (usuario != null){
+            model.addAttribute("usuarios", usuario);
+            return"detalhesUsuario";
+        }else {
+            model.addAttribute("usuarios", usuario);
+            return "listarUsuarios";
+
+        }
+    }
+
 
 
 

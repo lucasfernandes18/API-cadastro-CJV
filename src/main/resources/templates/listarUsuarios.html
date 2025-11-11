@@ -10,7 +10,11 @@
 <div class="container">
     <h2 class="mb-4 text-center">Lista de Usuários</h2>
 
-    <table class="table table-bordered table-striped table-hover">
+    <div class="mb-3 text-end">
+        <a href="/usuarios/ui/novo" class="btn btn-success">+ Novo Usuário</a>
+    </div>
+
+    <table class="table table-bordered table-striped table-hover align-middle">
         <thead class="table-dark text-center">
         <tr>
             <th>Nome</th>
@@ -19,11 +23,11 @@
             <th>CNH</th>
             <th>Email</th>
             <th>Carros</th>
+            <th>Ações</th>
         </tr>
         </thead>
 
         <tbody>
-        <!-- Loop para cada usuário -->
         <tr th:each="usuario : ${usuarios}">
             <td th:text="${usuario.nome}"></td>
             <td th:text="${usuario.idade}"></td>
@@ -31,16 +35,42 @@
             <td th:text="${usuario.cnh}"></td>
             <td th:text="${usuario.email}"></td>
 
-            <!-- Lista de carros do usuário -->
+            <!-- Lista de carros -->
             <td>
-                <ul>
+                <ul class="mb-0">
                     <li th:each="carro : ${usuario.carros}" th:text="${carro.modelo}"></li>
                 </ul>
+            </td>
+
+            <!-- Ações -->
+            <td class="text-center">
+                <div class="d-flex justify-content-center gap-2">
+
+                    <!-- Botão Detalhes: aponta para /usuarios/ui/detalhes/{id} -->
+                    <a th:href="@{/usuarios/ui/detalhes/{id}(id=${usuario.id})}"
+                       class="btn btn-sm btn-primary">
+                        Detalhes
+                    </a>
+
+                    <!-- Botão Editar -->
+                    <a th:href="@{/usuarios/ui/editar/{id}(id=${usuario.id})}"
+                       class="btn btn-sm btn-warning text-white">
+                        Editar
+                    </a>
+
+                    <!-- Botão Excluir -->
+                    <a th:href="@{/usuarios/ui/deletar/{id}(id=${usuario.id})}"
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('Tem certeza que deseja excluir este usuário?');">
+                        Excluir
+                    </a>
+                </div>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
