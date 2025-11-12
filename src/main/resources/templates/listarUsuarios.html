@@ -46,11 +46,12 @@
             <td class="text-center">
                 <div class="d-flex justify-content-center gap-2">
 
-                    <!-- Botão Detalhes: aponta para /usuarios/ui/detalhes/{id} -->
-                    <a th:href="@{/usuarios/ui/detalhes/{id}(id=${usuario.id})}"
+                    <!-- Botão Detalhes: aponta para /usuarios/ui/usuarioId/{id} -->
+                    <a th:href="@{/usuarios/ui/usuarioId/{id}(id=${usuario.id})}"
                        class="btn btn-sm btn-primary">
                         Detalhes
                     </a>
+
 
                     <!-- Botão Editar -->
                     <a th:href="@{/usuarios/ui/editar/{id}(id=${usuario.id})}"

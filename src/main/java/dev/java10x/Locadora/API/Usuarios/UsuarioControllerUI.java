@@ -32,21 +32,20 @@ public class UsuarioControllerUI {
     }
 
 
-
     @GetMapping("/usuarioId/{id}")
     public String listarUsuariosPorId(@PathVariable Long id, Model model) {
         UsuarioDTO usuario = usuarioService.listarUsuariosPorId(id);
-        if (usuario != null){
-            model.addAttribute("usuarios", usuario);
-            return"detalhesUsuario";
-        }else {
-            model.addAttribute("usuarios", usuario);
-            return "listarUsuarios";
 
+        if (usuario != null) {
+            model.addAttribute("usuario", usuario);
+            return "detalhesUsuario"; // Nome do arquivo .html
+        } else {
+            model.addAttribute("mensagem", "Usuário não encontrado");
+            return "listarUsuarios";
         }
     }
-
-
-
-
 }
+
+
+
+
