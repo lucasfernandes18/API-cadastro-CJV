@@ -32,6 +32,7 @@ public class UsuarioControllerUI {
     }
 
 
+    //exibe as informações do usuário
     @GetMapping("/usuarioId/{id}")
     public String listarUsuariosPorId(@PathVariable Long id, Model model) {
         UsuarioDTO usuario = usuarioService.listarUsuariosPorId(id);
@@ -44,6 +45,23 @@ public class UsuarioControllerUI {
             return "listarUsuarios";
         }
     }
+
+
+    @GetMapping("/editar/{id}")
+    public String exibirFormularioEdicao(@PathVariable Long id, Model model) {
+        UsuarioDTO usuario = usuarioService.listarUsuariosPorId(id);
+
+        if (usuario == null) {
+            model.addAttribute("mensagem", "Usuário não encontrado");
+            return "redirect:/usuarios/ui";
+        }
+
+        model.addAttribute("usuario", usuario); // 👈 IMPORTANTE
+        return "editarUsuario";
+    }
+
+
+
 }
 
 
