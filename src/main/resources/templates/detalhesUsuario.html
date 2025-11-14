@@ -66,6 +66,18 @@
 <body class="d-flex justify-content-center align-items-center p-4">
 
 <div class="container mt-5">
+
+    <!-- ✅ Mensagens de sucesso ou erro -->
+    <div th:if="${param.sucesso}" class="alert alert-success alert-dismissible fade show" role="alert">
+        Usuário atualizado com sucesso!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    </div>
+
+    <div th:if="${param.erro}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        Ocorreu um erro ao atualizar o usuário.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    </div>
+
     <div class="card mx-auto" style="max-width: 600px;">
         <h2 class="card-title text-center mb-4" th:text="'Usuário: ' + ${usuario.nome}">Usuário: Nome</h2>
 
@@ -99,9 +111,19 @@
             </li>
         </ul>
 
-        <div class="text-center">
+        <div class="text-center mt-4">
+
             <a href="/usuarios/ui/listar" class="btn btn-back me-2">Voltar</a>
-            <a th:href="@{/usuarios/ui/usuarioId/{id}(id=${usuario.id})}" class="btn btn-custom">Editar Usuário</a>
+
+
+            <a th:href="@{/usuarios/ui/editar/{id}(id=${usuario.id})}" class="btn btn-custom me-2">Editar Usuário</a>
+
+
+            <form th:action="@{/usuarios/ui/deletar/{id}(id=${usuario.id})}" method="post" style="display:inline;"
+                  onsubmit="return confirm('Tem certeza que deseja excluir este usuário?');">
+                <input type="hidden" name="_method" value="delete"/>
+                <button type="submit" class="btn btn-danger">Excluir</button>
+            </form>
         </div>
     </div>
 </div>
