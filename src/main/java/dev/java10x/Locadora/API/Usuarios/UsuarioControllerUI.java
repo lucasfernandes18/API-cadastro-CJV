@@ -48,17 +48,20 @@ public class UsuarioControllerUI {
     }
 
 
-    @GetMapping("/editar/{id}")
+    @GetMapping("/exibirEdit/{id}")
     public String exibirFormularioEdicao(@PathVariable Long id, Model model) {
         UsuarioDTO usuario = usuarioService.listarUsuariosPorId(id);
 
-        if (usuario == null) {
-            model.addAttribute("mensagem", "Usuário não encontrado");
-            return "redirect:/usuarios/ui";
-        }
-
         model.addAttribute("usuario", usuario);
         return "editarUsuario";
+    }
+
+    @PutMapping("/editar")
+    public String processarEdit(@ModelAttribute UsuarioDTO usuarioAtualizado, @RequestParam Long id, RedirectAttributes redirectAttributes){
+        usuarioService.alterarUsuario(id, usuarioAtualizado);
+        redirectAttributes.addFlashAttribute("mensagem", "Usuário atualizado com sucesso!");
+
+        return "redirect:/usuarios/ui/listar";
     }
 
 
@@ -73,7 +76,7 @@ public class UsuarioControllerUI {
     public String processarCriacao(@ModelAttribute UsuarioDTO usuario, RedirectAttributes redirectAttributes) {
         usuarioService.criarUsuario(usuario);
         redirectAttributes.addAttribute("mensagem", "perfil criado");
-        return "redirect:/usuarios/ui/listar";
+        return "redirect:/usuarios/ui/usuarioId";
     }
 
 

@@ -40,7 +40,15 @@
     <div class="card mx-auto" style="max-width: 600px;">
         <h2 class="text-center text-primary mb-4">Editar Usuário</h2>
 
-        <form th:action="@{/usuarios/ui/editar/{id}(id=${usuario.id})}" method="post" th:object="${usuario}">
+        <!-- Formulário compatível com SEU controller -->
+        <form th:action="@{/usuarios/ui/editar}" method="post" th:object="${usuario}">
+
+            <!-- Necessário para usar PUT -->
+            <input type="hidden" name="_method" value="put">
+
+            <!-- Envia o id como RequestParam -->
+            <input type="hidden" name="id" th:value="${usuario.id}"/>
+
             <div class="mb-3">
                 <label class="form-label">Nome</label>
                 <input type="text" class="form-control" th:field="*{nome}" required>
