@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -56,10 +57,24 @@ public class UsuarioControllerUI {
             return "redirect:/usuarios/ui";
         }
 
-        model.addAttribute("usuario", usuario); // 👈 IMPORTANTE
+        model.addAttribute("usuario", usuario);
         return "editarUsuario";
     }
 
+
+
+    //criação do usuário
+    @GetMapping("/criar")
+    public String mostrarFormulárioAdd(Model model){
+        model.addAttribute("usuario", new UsuarioDTO());
+        return "CriarUsuario";
+    }
+    @PostMapping("/salvar")
+    public String processarCriacao(@ModelAttribute UsuarioDTO usuario, RedirectAttributes redirectAttributes) {
+        usuarioService.criarUsuario(usuario);
+        redirectAttributes.addAttribute("mensagem", "perfil criado");
+        return "redirect:/usuarios/ui/listar";
+    }
 
 
 }
