@@ -2,6 +2,7 @@ package dev.java10x.Locadora.API.Usuarios;
 
 
 import dev.java10x.Locadora.API.Carros.CarroDTO;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -21,6 +22,7 @@ public class UsuarioController {
 
     //Adicionar usuário (create)
     @PostMapping("/criar")
+    @Operation(summary = "Rota de criação de novo usuário")
     //@RequestBody faz a serialização inversa dos usuarios do ninja model de volta para o db
     public ResponseEntity<String> criarUsuario(@RequestBody UsuarioDTO usuario) {
         UsuarioDTO novoUsuario = usuarioService.criarUsuario(usuario);
@@ -30,6 +32,7 @@ public class UsuarioController {
 
     //mostrar todos os usuarios (read)
     @GetMapping("/listar")
+    @Operation(summary = "exibe a lista de usuários")
     public ResponseEntity<List<UsuarioDTO>> listarUsuarios() {
        List<UsuarioDTO> usuarios = usuarioService.listarUsuarios();
         return ResponseEntity.ok(usuarios);
@@ -37,6 +40,7 @@ public class UsuarioController {
 
     //mostrar usuário por id (read)
     @GetMapping("/usuarioId/{id}")
+    @Operation(summary = "exibe os dados do usuário")
     public ResponseEntity<?> listarUsuariosPorId(@PathVariable Long id) {
         UsuarioDTO usuario = usuarioService.listarUsuariosPorId(id);
         if (usuarioService.listarUsuariosPorId(id) != null){
@@ -49,6 +53,7 @@ public class UsuarioController {
 
     //Alterar dados dos usu (update)
     @PutMapping("/alterar/{id}")
+    @Operation(summary = "altera um usuário por id")
     public ResponseEntity<String> alterarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioAtualizado) {
        UsuarioDTO usuario = usuarioService.listarUsuariosPorId(id);
         if (usuarioService.alterarUsuario(id, usuarioAtualizado) != null){
@@ -63,6 +68,7 @@ public class UsuarioController {
     //Deletar Usuario (delete)
 
     @DeleteMapping("/deletar/{id}")
+    @Operation(summary = "deleta um usuário")
     public ResponseEntity<String> deletarUsuarioPorID(@PathVariable Long id) {
 
         if (usuarioService.listarUsuariosPorId(id) != null) {
