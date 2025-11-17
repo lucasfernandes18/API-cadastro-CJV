@@ -3,6 +3,7 @@ package dev.java10x.Locadora.API.Carros;
 import dev.java10x.Locadora.API.Usuarios.UsuarioDTO;
 import dev.java10x.Locadora.API.Usuarios.UsuarioModel;
 import dev.java10x.Locadora.API.Usuarios.UsuarioRepository;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,8 @@ public class CarroController {
 
 
     @PostMapping("/criar")
+    @Operation(summary = "Rota de criação de novo carro")
+
     public ResponseEntity<?> criarCarroAlugado(@RequestBody CarroDTO carroDTO) {
         try {
             CarroDTO carroResponse = carroService.criarCarroAlugado(carroDTO);
@@ -38,12 +41,15 @@ public class CarroController {
 
 
     @GetMapping("/listar")
+    @Operation(summary = "exibe a lista de usuários")
     public ResponseEntity<List<CarroDTO>> listarCarros(){
         List<CarroDTO> carros = carroService.listarCarros();
         return ResponseEntity.ok(carros);
     }
 
     @GetMapping("/carroId/{id}")
+    @Operation(summary = "exibe os dados do usuário")
+
     public ResponseEntity<?> carroId(@PathVariable Long id){
         CarroDTO carro = carroService.buscarCarrosPorId(id);
         if (carroService.buscarCarrosPorId(id) != null){
@@ -55,6 +61,8 @@ public class CarroController {
     }
 
     @PutMapping("/alterar/{id}")
+    @Operation(summary = "altera um usuário por id")
+
     public ResponseEntity<String> alterarCarro(@RequestBody Long id, CarroDTO carroAtualizado){
         CarroDTO carro = carroService.buscarCarrosPorId(id);
         if (carroService.alterarCarro(id , carroAtualizado) != null){
@@ -67,6 +75,8 @@ public class CarroController {
     }
 
     @DeleteMapping("/deletar/{id}")
+    @Operation(summary = "deleta um usuário")
+
     public ResponseEntity<String> deletarCarro(@PathVariable Long id){
         if (carroService.buscarCarrosPorId(id) != null){
             carroService.deletarCarro(id);
